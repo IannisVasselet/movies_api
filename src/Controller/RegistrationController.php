@@ -82,37 +82,6 @@ class RegistrationController
         }
     }
 
-    // Show all users
-    /**
-     * @Route("/api/users", name="users", methods={"GET"})
-     * @OA\Get(
-     *     path="/api/users",
-     *     tags={"Users"},
-     *     summary="Get all users",
-     *     description="Get all users",
-     *     operationId="users",
-     *     @OA\Response(
-     *         response=200,
-     *         description="Users retrieved successfully"
-     *     ),
-     *     @OA\Response(
-     *         response=400,
-     *         description="Invalid input"
-     *     )
-     *   )
-     * )
-     */
-    public function users(Request $request): Response
-    {
-        try {
-            $users = $this->entityManager->getRepository(User::class)->findAll();
-            dd ($users);
-            return new Response(json_encode($users), 200, ['Content-Type' => 'application/json']);
-        } catch (\Exception $e) {
-            return new Response('An error occurred: ' . $e->getMessage(), 500);
-        }
-    }
-
     /**
      * @Route("/api/login", name="get_login", methods={"POST"})
      * @OA\Post(

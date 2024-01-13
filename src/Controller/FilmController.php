@@ -67,6 +67,9 @@ class FilmController extends AbstractController
      */
     public function list(SerializerInterface $serializer, Request $request, FilmService $filmService): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException("Vous n'avez pas les droits requis pour cette action.");
+        }
         $films = $filmService->getAllFilms(
             $request->query->get('page', 1),
             $request->query->get('pageSize', 10)
