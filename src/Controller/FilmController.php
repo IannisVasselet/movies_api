@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Service\FilmService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -64,9 +65,9 @@ class FilmController extends AbstractController
      * )
      * @OA\Tag(name="Film")
      */
-    public function list(SerializerInterface $serializer, Request $request): Response
+    public function list(SerializerInterface $serializer, Request $request, FilmService $filmService): Response
     {
-        $films = $this->entityManager->getRepository(Film::class)->findAllFilms(
+        $films = $filmService->getAllFilms(
             $request->query->get('page', 1),
             $request->query->get('pageSize', 10)
         );
