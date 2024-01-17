@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 
@@ -20,14 +21,18 @@ class RegistrationController
     private $passwordEncoder;
     private $validator;
     private $JWTManager;
+    private $security;
 
 
-    public function __construct(EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordEncoder, ValidatorInterface $validator, JWTTokenManagerInterface $jwtManager)
+
+    public function __construct(EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordEncoder, ValidatorInterface $validator, JWTTokenManagerInterface $jwtManager, Security $security)
     {
         $this->entityManager = $entityManager;
         $this->passwordEncoder = $passwordEncoder;
         $this->validator = $validator;
         $this->JWTManager = $jwtManager;
+        $this->security = $security;
+
     }
 
     /**
@@ -122,4 +127,33 @@ class RegistrationController
 
         return new Response(json_encode(['token' => $token]), 200, ['Content-Type' => 'application/json']);
     }
+
+    /**
+     * @Route("/api/login_check", name="check_login", methods={"GET"})
+     * @OA\Get(
+     *     path="/api/login_check",
+     *     tags={"Login"},
+     *     summary="Check if a user is logged in",
+     *     description="Check if a user is logged in",
+     *     operationId="check_login",
+     *     security={{"bearer":{}}},
+     *     @OA\Response(
+     *     response=200,
+     *     description="User logged in"
+     *    ),
+     *     @OA\Response(
+     *     response=401,
+     *     description="User not logged in"
+     *   )
+     * )
+     */
+    public function checkLogin(): Response
+    {
+        $user = $this->security->getUser();
+
+        if ($user) {
+            return new Response('User is logged in', 200);
+        } else {
+            return new Response('User is not logged in', 401);
+        }    }
 }
