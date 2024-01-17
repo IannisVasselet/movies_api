@@ -984,16 +984,16 @@
         },
         {
             "name": "doctrine/inflector",
-            "version": "2.0.8",
+            "version": "2.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "f9301a5b2fb1216b2b08f02ba04dc45423db6bff"
+                "reference": "2930cd5ef353871c821d5c43ed030d39ac8cfe65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/f9301a5b2fb1216b2b08f02ba04dc45423db6bff",
-                "reference": "f9301a5b2fb1216b2b08f02ba04dc45423db6bff",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/2930cd5ef353871c821d5c43ed030d39ac8cfe65",
+                "reference": "2930cd5ef353871c821d5c43ed030d39ac8cfe65",
                 "shasum": ""
             },
             "require": {
@@ -1055,7 +1055,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/inflector/issues",
-                "source": "https://github.com/doctrine/inflector/tree/2.0.8"
+                "source": "https://github.com/doctrine/inflector/tree/2.0.9"
             },
             "funding": [
                 {
@@ -1071,7 +1071,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-06-16T13:40:37+00:00"
+            "time": "2024-01-15T18:05:13+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -2210,16 +2210,16 @@
         },
         {
             "name": "nelmio/api-doc-bundle",
-            "version": "v4.17.1",
+            "version": "v4.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
-                "reference": "e1405ef4ab46425b35438a73b60b1e180427a5c8"
+                "reference": "2360674a7bd8bbf5fb834b08e89662b6ad851618"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/e1405ef4ab46425b35438a73b60b1e180427a5c8",
-                "reference": "e1405ef4ab46425b35438a73b60b1e180427a5c8",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/2360674a7bd8bbf5fb834b08e89662b6ad851618",
+                "reference": "2360674a7bd8bbf5fb834b08e89662b6ad851618",
                 "shasum": ""
             },
             "require": {
@@ -2316,9 +2316,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nelmio/NelmioApiDocBundle/issues",
-                "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/v4.17.1"
+                "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/v4.18.1"
             },
-            "time": "2024-01-11T22:11:40+00:00"
+            "time": "2024-01-15T16:16:29+00:00"
         },
         {
             "name": "nelmio/cors-bundle",
