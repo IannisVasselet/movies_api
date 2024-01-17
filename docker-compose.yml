@@ -17,6 +17,8 @@ services:
         POSTGRES_DB: movies_api
         POSTGRES_USER: iannis_api
         POSTGRES_PASSWORD: iannis
+      ports:
+        - "5432:5432"
       volumes:
         - postgres_data:/var/lib/postgresql/datapostgresql/data:rw
 ###< doctrine/doctrine-bundle ###

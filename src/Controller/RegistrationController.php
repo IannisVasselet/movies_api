@@ -24,7 +24,6 @@ class RegistrationController
     private $security;
 
 
-
     public function __construct(EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordEncoder, ValidatorInterface $validator, JWTTokenManagerInterface $jwtManager, Security $security)
     {
         $this->entityManager = $entityManager;
@@ -75,6 +74,7 @@ class RegistrationController
             $user = new User();
             $user->setEmail($data['email']);
             $user->setRoles(['ROLE_USER']);
+            $user->setUsername($data['username']);
 
             $user->setPassword($this->passwordEncoder->hashPassword($user, $data['password'])); // Correct method
 
@@ -123,6 +123,8 @@ class RegistrationController
             return new Response('Invalid credentials', 400);
         }
 
+        dump($user);
+
         $token = $this->JWTManager->create($user);
 
         return new Response(json_encode(['token' => $token]), 200, ['Content-Type' => 'application/json']);
@@ -151,9 +153,12 @@ class RegistrationController
     {
         $user = $this->security->getUser();
 
+        dump($user);
+
         if ($user) {
             return new Response('User is logged in', 200);
         } else {
             return new Response('User is not logged in', 401);
-        }    }
+        }
+    }
 }
