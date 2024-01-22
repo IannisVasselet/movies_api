@@ -46,8 +46,11 @@ class RegistrationController
      *         description="User to register",
      *         required=true,
      *         @OA\JsonContent(
-     *        type="array",
-     *        @OA\Items(ref=@Model(type=User::class, groups={"user"}))
+     *        type="object",
+     *         required={"email", "password","username"},
+     *              @OA\Property(property="email", type="string"),
+     *              @OA\Property(property="username", type="string"),
+     *              @OA\Property(property="password", type="string")
      *     ),
      *     @OA\Response(
      *         response=201,
@@ -73,6 +76,7 @@ class RegistrationController
 
             $user = new User();
             $user->setEmail($data['email']);
+            $user->setUsername($data['username']);
             $user->setRoles(['ROLE_USER']);
             $user->setUsername($data['username']);
 
@@ -117,13 +121,15 @@ class RegistrationController
     public function login(Request $request): Response
     {
         $data = json_decode($request->getContent(), true);
+        // Vérfier que l'email et le mot de passe sont bien envoyés
+        if (!isset($data['email']) || !isset($data['password'])) {
+            return new Response('Email or password not sent', 400);
+        }
 
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $data['email']]);
         if (!$user || !$this->passwordEncoder->isPasswordValid($user, $data['password'])) {
             return new Response('Invalid credentials', 400);
         }
-
-        dump($user);
 
         $token = $this->JWTManager->create($user);
 

@@ -18,14 +18,13 @@ security:
             pattern:  ^/api/login
             stateless: true
             json_login:
-                check_path: /api/login/check
+                check_path: /api/login_check
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
         api:
             pattern: ^/api
             stateless: true
-            jwt: ~
-
+            jwt: true
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
@@ -35,12 +34,11 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
- #       - { path: ^/api/films, roles: ROLE_ADMIN, methods: [POST, PUT, DELETE] }
-        - { path: ^/api/login, roles: PUBLIC_ACCESS }
-        - { path: ^/api/register, roles: PUBLIC_ACCESS }
-        - { path: ^/api/film/test, roles: PUBLIC_ACCESS }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
-
+        - { path: ^/api/login, roles: PUBLIC_ACCESS }
+        - { path: ^/api/register, roles: ROLE_ADMIN }
+        - { path: ^/api/film, roles: ROLE_ADMIN, methods: [POST, PUT, DELETE] }
+        - { path: ^/api/category, roles: ROLE_ADMIN, methods: [POST, PUT, DELETE] }
 
 when@test:
     security:

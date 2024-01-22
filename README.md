@@ -80,9 +80,8 @@ Pour accéder à l'application, ouvrez votre navigateur et allez à `http://loca
    docker-compose exec web openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
    ```
 
-Comming soon...
 
-## Dociumentation API via Swagger
+## Documentation API via Swagger
 
 Pour accéder à la documentation de l'API, ouvrez votre navigateur et allez à `http://localhost:8000/api/doc`.
 
@@ -125,6 +124,8 @@ L'API MOVIES_API supporte désormais les réponses en format JSON et XML. Les cl
 - [Création d'une Catégorie](#création-dune-catégorie)
 - [Modification d'une Catégorie](#modification-dune-catégorie)
 - [Suppression d'une Catégorie](#suppression-dune-catégorie)
+- [Création d'un Utilisateur](#création-dun-utilisateur)
+- [Authentification](#authentification)
 
 ## Récupération de tous les Films
 **GET** `api/film/list`
@@ -424,4 +425,51 @@ Cette route permet de supprimer une catégorie spécifique.
 }
 ```
 
+## Création d'un Utilisateur
+**POST** `api/register`
+- `email` : Email de l'Utilisateur
+- `password` : Mot de Passe de l'Utilisateur
+- `username` : Nom d'Utilisateur de l'Utilisateur 
 
+Cette route permet de créer un nouvel utilisateur.
+** Attention : ** L'API ne permet pas de modifier un utilisateur. Et il faut être admin pour pouvoir créer un utilisateur.
+
+**Paramètres :**
+```json
+{
+  "email": "test@example.com",
+  "username": "test",
+  "password": "test"
+}
+```
+
+**Réponse :**
+```json
+{
+  "message": "User registered successfully",
+}
+```
+
+## Authentification
+**POST** `api/login`
+- `email` : Email de l'Utilisateur
+- `password` : Mot de Passe de l'Utilisateur
+- `username` : Nom d'Utilisateur de l'Utilisateur
+
+Cette route permet de s'authentifier.
+
+**Paramètres :**
+```json
+{
+    "email": "admin@example.com",
+		"username":"admin",
+    "password": "securepassword"
+}
+```
+
+**Réponse :**
+```json
+{
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIs...."
+}
+```
